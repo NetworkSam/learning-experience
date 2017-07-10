@@ -52,10 +52,35 @@ http.createServer(function (req, res) {
                 });
                 break;
             case 'PUT':
+                req.on('data',function (data) {
+                    let newDate =JSON.parse(data);
+                    users.forEach((item)=> {
+                        // console.log(item.id,newDate.id);
+                        if(item.id == newDate.id){
+                            item.username = newDate.username;
+                            item.password = newDate.password;
+                            item.id = newDate.id;
+                        }
+                    } );
+
+                });
+                req.on('end',function () {
+                    res.end(JSON.stringify(users));
+                });
 
                 break;
             case 'DELETE':
+                req.on('data',function (data) {
+                    // console.log(data);
+                    users = users.filter((item)=> item.id != JSON.parse(data).id );
+                });
 
+                req.on('end',function () {
+                    users.forEach((item,index)=>{
+                        item.id = index+1;
+                    });
+                    res.end(JSON.stringify(users));
+                });
                 break;
             default:
                 res.end('INTERFACE NOT EXITS');
@@ -72,4 +97,4 @@ http.createServer(function (req, res) {
             res.end("404 Not Found");
         }
     }
-}).listen(9000);
+}).listen(8000);

@@ -1,5 +1,5 @@
 function ajax ({url='',type='text',method='GET',async=true,data={}}) {
-    console.log(arguments);
+    // console.log(arguments);
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.responseType = type;
