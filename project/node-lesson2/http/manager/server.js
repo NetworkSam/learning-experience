@@ -2,6 +2,7 @@ let http = require('http');
 let fs = require('fs');
 let mime = require('mime');
 let url = require('url');
+
 let users = [
     {
         username: 'samuel',
@@ -42,20 +43,14 @@ http.createServer(function (req, res) {
                 let str = '';
                 req.on('data',function (data) {
                     str+=data;
-                    console.log(str);
-                    
                 });
-
-
                 req.on('end',function () {
                     let user = JSON.parse(str); //获取要添加的用户
                     user.id =users.length>0?users[users.length-1].id+1:1;
                     users.push(user);
                     res.end(JSON.stringify(users));
                 });
-
                 break;
-
             case 'PUT':
 
                 break;
@@ -66,7 +61,6 @@ http.createServer(function (req, res) {
                 res.end('INTERFACE NOT EXITS');
                 break;
         }
-
     }else {
         let flag = fs.existsSync('.'+pathname);
         if(flag){
@@ -78,5 +72,4 @@ http.createServer(function (req, res) {
             res.end("404 Not Found");
         }
     }
-
 }).listen(9000);

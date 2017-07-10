@@ -103,9 +103,16 @@
             console.log(err);
         });
 
-
+        function trim(str){
+            let newStr = str.replace(/^\s*$/g,'');
+            return newStr;
+        }
         signIn.addEventListener('click',function () {
-            console.log('username',username.value);
+            //console.log(username.value,password.value);
+            if( trim(username.value).length == 0 && trim(password.value).length == 0){
+                alert('数据添加不能为空!请重新输入!');
+                return;
+            }
             ajax({
                 url:'/user',
                 method:'POST',
