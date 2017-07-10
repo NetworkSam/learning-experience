@@ -10,6 +10,6 @@ function ajax ({url='',type='text',method='GET',async=true,data={}}) {
         xhr.onerror = function (err) {
             reject(err);
         };
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
     })
 }
