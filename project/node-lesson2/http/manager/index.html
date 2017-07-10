@@ -91,10 +91,15 @@
                     <a class="list-group-item list-group-item-success">
                     姓名:${item.username}
                     密码:${item.password}
+                    <div class="btn btn-danger btn-xs" onclick="Delete(${item.id})">删除</div>
                     </a>
                 `;
             });
             oUl.innerHTML = str;
+
+            window.Delete = function (id) {
+                alert('要删除的数据id是:'+id);
+            }
         }
 
         ajax(sendData).then(function (data) {
