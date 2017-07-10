@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+
+    </header>
+
+    <section class="body">
+
+    </section>
+
+    <footer class="footer">
+
+    </footer>
+</div>
+
+
+<div></div>
+<iframe src="1.html" frameborder="0" height="0" width="0"></iframe>
+
+<style>
+    /*iframe{*/
+        /*width: 100%;*/
+        /*height:300px;*/
+    /*}*/
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    html,body{
+        width:100%;
+        height:100%;;
+    }
+
+
+    .container{
+        position: relative;
+        width: 100%;
+        height:100%;
+    }
+
+    .header{
+        background-color: red;
+        height:100px;
+    }
+
+    .body{
+        background-color: gray;
+        top: 100px;
+        bottom: 100px;
+        position: absolute;
+        left:0;
+        right:0;
+    }
+
+    .footer{
+        background-color: blue;
+        height: 100px;
+        width:100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+</style>
+<script src="echarts.js"></script>
+<script>
+window.onload = function () {
+//    var x =0;
+//    function kit (a,b,c) {
+//        var x = 10;
+//        x++;
+//        console.log(x);
+//        this.x = x;
+//        console.log(this.x);
+//        console.log();
+//        return arguments.callee;
+//    }
+//    var fac = new kit;
+//    console.log(fac.x);
+
+//    var str = "welcome to didi";
+//    console.log(str.match(/\w+/g)[2]);
+//    console.log(str.match(/\w+?/g)[2]);
+//    console.log(str.match(/\w+?(?=\s)/g));
+
+//        var x = 1;
+//        var kit = {
+//            x:2,
+//            buf:{
+//                x:3,
+//                fac:function () {
+//                    return this.x
+//                }
+//            },
+//        };
+//
+//        var kbf = kit.buf.fac;
+//        console.log(kbf());
+//        console.log(kit.buf.fac());
+
+//        var kit = 1;
+//        function fac () {
+//            kit = 10;
+//            return;
+//            function kit () {
+//
+//            }
+//        }
+//        fac();
+//        console.log(kit);
+
+        //获取页面的节点个数
+        let nodeName = [];
+        function getAll (dom) {
+            var nodes = dom.getElementsByTagName("*");
+            for(var i = 0 ; i< nodes.length; i++){
+                if(nodes[i] != undefined){
+                    if(nodes[i].localName == 'iframe'){
+                        getAll(nodes[i].contentWindow.document);
+                    }
+                    nodeName.push(nodes[i].localName);
+                }
+            }
+        }
+
+        getAll(document);
+        var obj = {};
+        nodeName.forEach(function(item){
+            obj[item] = item;
+        });
+
+        //打印页面标签个数
+        console.log(Object.keys(obj).length);
+
+//    $.ajax({
+//        method: "POST",
+//        data:{},
+//        url: url,
+//        dataType:"",
+//        success:function (data) {
+//        },
+//        error:function (e) {
+//        }
+//    });
+
+        //页面埋点
+
+
+        /**
+         *对象浅复制、深度克隆
+         *
+         *
+         *页面自动跳转有几种方式 window.location.href setTimeout window.open a 前端路由匹配
+         *
+         *
+         *统计一个页面中有几种节点类型？ 页面中出现iframe，由于跨域问题不能获取iframe内部的内容，怎么解决？
+         *
+         *
+         *数据转换
+         * [{companyId:1,customerId:”a”},{companyId:2,customerId:”b”},{companyId:3,customerId:”c”},……];
+         *转换成[{companyId:1,customers:[“a”,”c”]}, {companyId:2,customers:[“b”]}]
+         *
+         *
+         * js的事件轮训eventloop的机制
+         *
+         *
+         *各个浏览器的内核原理
+         *
+         *
+         *为101234转换数据格式  101,234
+         *
+         */
+
+
+        var json1={
+            "name":"Gina",
+            "age":18,
+            "arr1":[1,2,3,4,5],
+            "string":'success',
+            "arr2":[1,2,3,4,5],
+            "arr3":[
+                {"name1":"Samuel"},
+                {"job":"web前端开发"}
+            ]
+        };
+        var json2={};
+        function copy(obj1,obj2){
+            var obj2=obj2||{}; //最初的时候给它一个初始值=它自己或者是一个json
+            for(var name in obj1){
+                if(typeof obj1[name] === "object"){ //先判断一下obj[name]是不是一个对象
+                    obj2[name]= (obj1[name].constructor===Array)?[]:{}; //我们让要复制的对象的name项=数组或者是json
+                    copy(obj1[name],obj2[name]); //然后来无限调用函数自己 递归思想
+                }else{
+                    obj2[name]=obj1[name];  //如果不是对象，直接等于即可，不会发生引用。
+                }
+            }
+            return obj2; //然后在把复制好的对象给return出去
+        }
+        json2=copy(json1,json2)
+        json1.arr1.push(6);
+        console.log(json1.arr1);  //123456
+        console.log(json2.arr1);  //12345
+
+}
+
+
+</script>
+</body>
+</html>

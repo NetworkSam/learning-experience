@@ -1,0 +1,1 @@
+console.log('哈哈,我是服务器js文件, you got it');

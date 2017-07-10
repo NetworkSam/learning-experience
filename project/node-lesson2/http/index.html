@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的第一个node服务</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<h1>Hello Samuel...</h1>
+<div id="clock"></div>
+<script src="index.js"></script>
+<script>
+//    let xhr = new XMLHttpRequest();
+//    let clock = document.getElementById('clock');
+//    xhr.open('GET','/clock',true);
+//    xhr.responseType ='json';
+//    xhr.onload = function () {
+//        //4和200都满足时
+//        //如果服务端返回的是对象 需要用xhr.response,如果返回的是字符串 两者均可
+//        clock.innerText = xhr.response.date;
+//    };
+//    xhr.send();
+    function ajax ({url='',type='text',method='GET',async=true,data={}}) {
+        return new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = type;
+            xhr.open(method,url, async);
+            xhr.onload = function () {
+                resolve(xhr.response);
+            };
+            xhr.onerror = function (err) {
+                reject(err);
+            };
+            xhr.send(data);
+        })
+    }
+    let sendData = {
+        url:'/clock',
+        type: 'json',
+        method: 'GET',
+        async: true
+    };
+
+    ajax(sendData).then(function (data) {
+        document.getElementById('clock').innerText = data.date
+    },function (err) {
+        console.log(err);
+    });
+
+</script>
+</body>
+</html>
