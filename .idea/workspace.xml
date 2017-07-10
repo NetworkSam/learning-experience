@@ -310,7 +310,7 @@
       <workItem from="1499484647640" duration="1669000" />
       <workItem from="1499486623391" duration="32952000" />
       <workItem from="1499584580731" duration="13529000" />
-      <workItem from="1499648388904" duration="518000" />
+      <workItem from="1499648388904" duration="620000" />
     </task>
     <task id="LOCAL-00001" summary="add http file">
       <created>1498966596567</created>
@@ -407,7 +407,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90879000" />
+    <option name="totallyTimeSpent" value="90981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="726" extended-state="6" />
