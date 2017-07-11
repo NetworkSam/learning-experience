@@ -3,7 +3,6 @@ let fs = require('fs');
 let mime = require('mime');
 let url = require('url');
 
-
 let users = [
     {
         username: 'samuel',
@@ -43,10 +42,8 @@ http.createServer(function (req, res) {
                 //获取请求体中的数据
                 let str = '';
                 req.on('data',function (data) {
-                    console.log(JSON.parse(data));
                     str+=data;
                 });
-
                 req.on('end',function () {
                     let user = JSON.parse(str); //获取要添加的用户
                     user.id =users.length>0?users[users.length-1].id+1:1;
@@ -55,17 +52,40 @@ http.createServer(function (req, res) {
                 });
                 break;
             case 'PUT':
+                req.on('data',function (data) {
+                    let newDate =JSON.parse(data);
+                    users.forEach((item)=> {
+                        // console.log(item.id,newDate.id);
+                        if(item.id == newDate.id){
+                            item.username = newDate.username;
+                            item.password = newDate.password;
+                            item.id = newDate.id;
+                        }
+                    } );
+
+                });
+                req.on('end',function () {
+                    res.end(JSON.stringify(users));
+                });
 
                 break;
             case 'DELETE':
+                req.on('data',function (data) {
+                    // console.log(data);
+                    users = users.filter((item)=> item.id != JSON.parse(data).id );
+                });
 
-
+                req.on('end',function () {
+                    users.forEach((item,index)=>{
+                        item.id = index+1;
+                    });
+                    res.end(JSON.stringify(users));
+                });
                 break;
             default:
                 res.end('INTERFACE NOT EXITS');
                 break;
         }
-
     }else {
         let flag = fs.existsSync('.'+pathname);
         if(flag){
@@ -77,5 +97,4 @@ http.createServer(function (req, res) {
             res.end("404 Not Found");
         }
     }
-
-}).listen(8040);
+}).listen(8000);
