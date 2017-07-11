@@ -9,6 +9,7 @@ let url = require('url');
 //     '.css': 'text/css',
 //     '.html': 'text/html'
 // };
+
 http.createServer(function (req, res) {
     let {pathname, query} = url.parse(req.url,true);
     // console.log(url.parse(req.url,true));

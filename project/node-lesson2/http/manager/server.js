@@ -2,6 +2,8 @@ let http = require('http');
 let fs = require('fs');
 let mime = require('mime');
 let url = require('url');
+
+
 let users = [
     {
         username: 'samuel',
@@ -41,11 +43,9 @@ http.createServer(function (req, res) {
                 //获取请求体中的数据
                 let str = '';
                 req.on('data',function (data) {
+                    console.log(JSON.parse(data));
                     str+=data;
-                    console.log(str);
-                    
                 });
-
 
                 req.on('end',function () {
                     let user = JSON.parse(str); //获取要添加的用户
@@ -53,13 +53,12 @@ http.createServer(function (req, res) {
                     users.push(user);
                     res.end(JSON.stringify(users));
                 });
-
                 break;
-
             case 'PUT':
 
                 break;
             case 'DELETE':
+
 
                 break;
             default:
@@ -79,4 +78,4 @@ http.createServer(function (req, res) {
         }
     }
 
-}).listen(9000);
+}).listen(8040);
