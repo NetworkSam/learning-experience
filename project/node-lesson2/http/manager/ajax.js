@@ -1,3 +1,13 @@
+/**
+ *
+ * @param url
+ * @param type
+ * @param method
+ * @param async
+ * @param data
+ * @returns {Promise}
+ */
+
 function ajax ({url='',type='text',method='GET',async=true,data={}}) {
     // console.log(arguments);
     return new Promise(function (resolve, reject) {
@@ -11,5 +21,5 @@ function ajax ({url='',type='text',method='GET',async=true,data={}}) {
             reject(err);
         };
         xhr.send(JSON.stringify(data));
-    })
+    });
 }

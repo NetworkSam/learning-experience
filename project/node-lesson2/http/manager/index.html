@@ -70,20 +70,17 @@
 </style>
 <script src="ajax.js"></script>
 <script>
-
     //RESTful
     // user?id=1 get 获取用户 通过query 来实现 获取一个 获取全部
     // user delete 删除用户
     // user post 添加用户
     // user put 修改用户
     //querySelector 静态的DOM映射
-
     let oUl = document.querySelector('.list-group');
     let signIn = document.querySelector('#signIn');
     let username = document.getElementById('inputEmail3');
     let password = document.getElementById('inputPassword3');
     let isPut = false,editData={};
-
     window.onload = function () {
         let sendData = {
             url:'/user',
@@ -91,7 +88,6 @@
             method: 'GET',
             async: true
         };
-
         function bindHtml (data) {
             let str = '';
             data.forEach((item) => {
@@ -106,18 +102,15 @@
             });
             oUl.innerHTML = str;
         }
-
         ajax(sendData).then(function (data) {
             bindHtml(data);
         },function (err) {
             console.log(err);
         });
-
         function trim(str){
             let newStr = str.replace(/^\s*$/g,'');
             return newStr;
         }
-
         function resetForm() {
             username.value = '';
             password.value = '';
@@ -173,9 +166,8 @@
                 console.log(data);
                 bindHtml(data);
             });
-
         };
-        
+
         window.Edit = function (usn,pwd,id) {
             username.value = usn;
             password.value = pwd;
