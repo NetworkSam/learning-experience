@@ -2,7 +2,6 @@ let http = require('http');
 let fs = require('fs');
 let mime = require('mime');
 let url = require('url');
-
 let users = [
     {
         username: 'samuel',
@@ -62,19 +61,15 @@ http.createServer(function (req, res) {
                             item.id = newDate.id;
                         }
                     } );
-
                 });
                 req.on('end',function () {
                     res.end(JSON.stringify(users));
                 });
-
                 break;
             case 'DELETE':
                 req.on('data',function (data) {
-                    // console.log(data);
                     users = users.filter((item)=> item.id != JSON.parse(data).id );
                 });
-
                 req.on('end',function () {
                     users.forEach((item,index)=>{
                         item.id = index+1;

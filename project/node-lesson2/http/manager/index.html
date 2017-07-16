@@ -59,6 +59,15 @@
 </div>
 
 
+
+
+<div class="test1">测试</div>
+
+<style>
+  .test1{
+      font-size:20px; line-height:0; border:1px solid #cccccc; background:#eeeeee;
+  }
+</style>
 <script src="ajax.js"></script>
 <script>
 
@@ -67,7 +76,6 @@
     // user delete 删除用户
     // user post 添加用户
     // user put 修改用户
-
     //querySelector 静态的DOM映射
 
     let oUl = document.querySelector('.list-group');
@@ -77,7 +85,6 @@
     let isPut = false,editData={};
 
     window.onload = function () {
-
         let sendData = {
             url:'/user',
             type: 'json',
@@ -120,7 +127,6 @@
                 alert('数据添加不能为空!请重新输入!');
                 return;
             }
-
             if(isPut){
                 ajax({
                     url:'/user',
@@ -153,12 +159,9 @@
                     resetForm();
                 });
             }
-
         },false);
 
-
         window.Delete = function (id) {
-//            console.log('要删除的数据id是:' + id);
             ajax({
                 url:'/user',
                 method:'DELETE',
@@ -174,8 +177,6 @@
         };
         
         window.Edit = function (usn,pwd,id) {
-//            console.log('需要修改的id是'+id);
-//            console.log(arguments);
             username.value = usn;
             password.value = pwd;
             editData ={
@@ -183,8 +184,6 @@
             };
             isPut = true;
         }
-        
-        
     }
 </script>
 
