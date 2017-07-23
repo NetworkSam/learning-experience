@@ -1,0 +1,19 @@
+{
+  "name": "gulp-pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" style="border-radius: 0;">
+    <div class="container-fluid">
+        <div class="navbar-header col-md-12">
+            <a href="/" class="navbar-brand">Samuel博客</a>
+            <ul class="nav navbar-nav">
+                <%if(user){%>
+                    <li><a href="/category/list">分类列表</a></li>
+                    <li><a href="/article/add">添加文章</a></li>
+                    <li><a href="/user/signout">退出</a></li>
+                <%}else{%>
+                    <li><a href="/user/signup">注册</a></li>
+                    <li><a href="/user/signin">登录</a></li>
+                <%}%>
+            </ul>
+
+            <% if(user) {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="">
+                            <img style="border-radius: 50%;" width="30" height="30" src="<%=user.avatar%>" alt="">
+                            <span><%=user.username%></span>
+                        </a>
+                    </li>
+                </ul>
+            <%}%>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <%if(success){%>
+                <div class="alert alert-success text-center">
+                    <%=success%>
+                </div>
+            <%}%>
+            <%if(error){%>
+                <div class="alert alert-danger text-center">
+                    <%=error%>
+                </div>
+            <%}%>
+        </div>
+    </div>
